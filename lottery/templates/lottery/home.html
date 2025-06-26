@@ -1,0 +1,49 @@
+{% extends 'lottery/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Check Lottery Results</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{% url 'check_result' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="ticket_code" class="form-label">Ticket Code</label>
+                        <input type="text" class="form-control" id="ticket_code" name="ticket_code" 
+                               placeholder="Enter your ticket code (e.g., AB1234 or 1234)" required>
+                        <div class="form-text">For 1st-3rd prizes, enter full code (e.g., AB123456). For others, last 4 digits.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="draw_date" class="form-label">Draw Date</label>
+                        <select class="form-select" id="draw_date" name="draw_date" required>
+                            <option value="" selected disabled>Select a date</option>
+                            {% for draw in draws %}
+                                <option value="{{ draw.draw_date|date:'Y-m-d' }}">
+                                    {{ draw.draw_name }} - {{ draw.draw_date|date:"d M Y" }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Check Result</button>
+                </form>
+            </div>
+        </div>
+
+        {% if draws %}
+        <div class="mt-4">
+            <h4>Recent Draws</h4>
+            <div class="list-group">
+                {% for draw in draws|slice:":5" %}
+                <a href="{% url 'past_results' %}" class="list-group-item list-group-item-action">
+                    {{ draw.draw_name }} - {{ draw.draw_date|date:"d M Y" }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
