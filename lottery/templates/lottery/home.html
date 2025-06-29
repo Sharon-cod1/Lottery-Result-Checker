@@ -4,7 +4,7 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card shadow">
-            <div class="card-header bg-primary text-white">
+            <div class="card-header text-white" style="background-color: #0d425e;">
                 <h3 class="mb-0">Check Lottery Results</h3>
             </div>
             <div class="card-body">
@@ -29,21 +29,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Check Result</button>
                 </form>
-            </div>
         </div>
-
-        {% if draws %}
-        <div class="mt-4">
-            <h4>Recent Draws</h4>
-            <div class="list-group">
-                {% for draw in draws|slice:":5" %}
-                <a href="{% url 'past_results' %}" class="list-group-item list-group-item-action">
-                    {{ draw.draw_name }} - {{ draw.draw_date|date:"d M Y" }}
-                </a>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
     </div>
 </div>
 {% endblock %}

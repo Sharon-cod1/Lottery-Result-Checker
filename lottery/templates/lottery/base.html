@@ -5,36 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kerala Lottery Result Checker</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .navbar{
-            background-color: #062637;
-            color: #4c778d;
+        :root {
+            --primary: #062637;;
+            --secondary: #fdd123;
+            --text: #4c778d;
         }
-        .prize-card {
-            transition: transform 0.3s;
+        
+        html, body {
+            height: 100%;
         }
-        .prize-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        
+        body {
+            display: flex;
+            flex-direction: column;
         }
-        .navbar-brand {
-            background-color: #062637;
-            font-weight: bold;
-            color: #4c778d !important;
+        
+        .main-content {
+            flex: 1;
         }
-        .foot{
-            background-color: #062637;
+        
+        .navbar {
+            background-color: var(--primary);
             color: white;
         }
-        .card-header bg-primary text-white{
-            background-color: ;
+        
+        .navbar-brand {
+            color: var(--secondary) !important;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            color: white !important;
+            margin: 0 10px;
+        }
+        
+        .nav-link:hover {
+            color: var(--secondary) !important;
+        }
+        
+        .footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            width: 100%;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .footer-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+        }
+        
+        .copyright {
+            background-color: rgba(0,0,0,0.2);
+            padding: 1rem 0;
+            margin-top: 1.5rem;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
+    <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}">Kerala Lottery</a>
+            <a class="navbar-brand" href="{% url 'home' %}">Lottery Checker</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -51,15 +103,38 @@
         </div>
     </nav>
 
-    <div class="container">
-        {% block content %}{% endblock %}
+    <div class="main-content">
+        <div class="container my-4">
+            {% block content %}{% endblock %}
+        </div>
     </div>
 
-    <footer class="mt-5 py-3 bg-light">
-        <div class="container text-center">
-            <p class="mb-0">© {% now "Y" %} Kerala Lottery Result Checker</p>
+    <footer class="footer mt-auto">
+        <div class="footer-container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>About Kerala Lottery</h5>
+                    <p>The Kerala State Lotteries is the first of its kind in India and was started in 1967.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h5>Quick Links</h5>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">About Us</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p class="mb-0">© {% now "Y" %} Kerala State Lotteries. All Rights Reserved.</p>
+            </div>
         </div>
-    </footer class="foot"> 
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
