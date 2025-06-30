@@ -13,17 +13,23 @@
             --text: #4c778d;
         }
         
-        html, body {
+        html,body {
             height: 100%;
+            margin: 0;
+            padding: 0;
+
         }
         
         body {
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
         }
         
         .main-content {
             flex: 1;
+            padding-bottom: 2rem; /* Add padding to prevent content from touching footer */
         }
         
         .navbar {
@@ -49,15 +55,13 @@
         .footer {
             background-color: var(--primary);
             color: white;
-            padding: 1.5rem 0 0 0;
+            padding: 2rem 0 0;
             width: 100%;
             font-size: 0.9rem;
         }
-        
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
+        .footer-wrapper {
+            margin-top: auto;
+            width: 100%;
         }
         
         .footer p {
@@ -93,14 +97,9 @@
         .copyright {
             background-color: rgba(0,0,0,0.3);
             padding: 1rem 0;
-            margin-top: 1.5rem;
-            width: 100vw;
-            position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
+            margin-top: 2rem;
             text-align: center;
+            width: 100%;
         }
         
         .footer-section {
