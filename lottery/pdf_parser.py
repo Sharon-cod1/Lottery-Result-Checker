@@ -1,23 +1,37 @@
 import re
-from pdfminer.high_level import extract_text
+import pdfplumber
 from dateutil.parser import parse
 
-def parse_lottery_pdf(pdf_path):
-    text = extract_text(pdf_path)
 
-    # Extract draw info
+
+def parse_lottery_pdf(pdf_path):
+    """
+    Parses a Kerala Lottery PDF and extracts draw information and prize details.
+
+    Args:
+        pdf_path (str): Path to the lottery result PDF.
+
+    Returns:
+        dict: Contains draw metadata and a list of prize-winning ticket information.
+    """
+
+    # Step 1: Extract text from all pages using pdfplumber
+    with pdfplumber.open(pdf_path) as pdf:
+        text = "\n".join([page.extract_text() for page in pdf.pages if page.extract_text()])
+
+    # Step 2: Extract draw name, date and time
     draw_match = re.search(r'DHANALEKSHMI LOTTERY NO\.(.+?) DRAW held on:\s*(.+?),', text)
     draw_name = draw_match.group(1).strip() if draw_match else "Unknown"
     draw_date = parse(draw_match.group(2)).date() if draw_match else None
     draw_time = parse(draw_match.group(2)).time() if draw_match else None
 
-    prizes = []
+    prizes = []  # Will hold all prize entries
 
-    # Clean code like 'AB 123456' -> 'AB123456'
+    # Utility: Clean ticket codes like 'AB 123456' => 'AB123456'
     def clean_code(code):
         return ''.join(c for c in code if c.isalnum()).upper()
 
-    # Function to extract full-code prizes (1st, 2nd, 3rd)
+    # Step 3: Extract 1st, 2nd, and 3rd full-code prizes using regex
     def extract_full_prize(prize_type, pattern):
         match = re.search(pattern, text)
         if match:
@@ -29,11 +43,20 @@ def parse_lottery_pdf(pdf_path):
                 'location': match.group(4).strip()
             })
 
-    extract_full_prize('1st', r'1st Prize Rs *: *(\d+)/-.*?1\)\s*([A-Z]{2})\s*(\d+)\s*\(([^)]+)\)')
-    extract_full_prize('2nd', r'2nd Prize Rs *: *(\d+)/-.*?1\)\s*([A-Z]{2})\s*(\d+)\s*\(([^)]+)\)')
-    extract_full_prize('3rd', r'3rd Prize Rs *: *(\d+)/-.*?1\)\s*([A-Z]{2})\s*(\d+)\s*\(([^)]+)\)')
+    extract_full_prize(
+        '1st',
+        r'1st Prize Rs *: *(\d+)/-.*?1\)\s*([A-Z]{2})\s*(\d+)\s*\(([^)]+)\)'
+    )
+    extract_full_prize(
+        '2nd',
+        r'2nd Prize Rs *: *(\d+)/-.*?1\)\s*([A-Z]{2})\s*(\d+)\s*\(([^)]+)\)'
+    )
+    extract_full_prize(
+        '3rd',
+        r'3rd Prize Rs *: *(\d+)/-.*?1\)\s*([A-Z]{2})\s*(\d+)\s*\(([^)]+)\)'
+    )
 
-    # Consolation Prize: multiple full codes
+    # Step 4: Extract consolation prizes (same number, different prefixes)
     cons_match = re.search(r'Cons Prize-Rs *: *(\d+)/-\s*((?:[A-Z]{2}\s*\d+\s*)+)', text)
     if cons_match:
         amount = float(cons_match.group(1).replace(',', ''))
@@ -47,9 +70,12 @@ def parse_lottery_pdf(pdf_path):
                 'location': None
             })
 
-    # Last-4-digit prizes (4th to 9th)
+    # Step 5: Extract last-4-digit-based prizes (4th to 9th)
     for prize_type in ['4th', '5th', '6th', '7th', '8th', '9th']:
-        # e.g. 4th Prize-Rs :5000/-  --> capture the amount and following block of 4-digit numbers
+        # Pattern explanation:
+        # - (\d+): prize amount
+        # - (.*?): block of numbers following prize amount
+        # - Stop at next prize section or end of text
         pattern = rf'{prize_type} Prize-Rs *: *(\d+)/-(.*?)(?=\n\d{{1,2}}[a-zA-Z]*\s+Prize|$)'
         match = re.search(pattern, text, re.DOTALL)
         if match:
@@ -64,9 +90,11 @@ def parse_lottery_pdf(pdf_path):
                     'location': None
                 })
 
+    # Return structured result
     return {
         'draw_name': draw_name,
         'draw_date': draw_date,
         'draw_time': draw_time,
         'prizes': prizes
     }
+
