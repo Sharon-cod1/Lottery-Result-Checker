@@ -1,4 +1,4 @@
-#!/home/sharon/python/Lottery result Checker/lottery_checker/venv/bin/python3
+#!/home/nandhu/Lottery-Result-Checker/venv/bin/python3
 """A command line tool for extracting text and images from PDF and
 output it to plain text, html, xml or tags.
 """

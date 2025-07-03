@@ -1,6 +1,4 @@
-#!/bin/sh
-'''exec' "/home/sharon/python/Lottery result Checker/lottery_checker/venv/bin/python3" "$0" "$@"
-' '''
+#!/home/nandhu/Lottery-Result-Checker/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

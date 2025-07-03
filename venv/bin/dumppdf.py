@@ -1,4 +1,4 @@
-#!/home/sharon/python/Lottery result Checker/lottery_checker/venv/bin/python3
+#!/home/nandhu/Lottery-Result-Checker/venv/bin/python3
 """Extract pdf structure in XML format"""
 
 import logging
