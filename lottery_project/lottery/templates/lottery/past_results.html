@@ -1,0 +1,66 @@
+{% extends 'lottery/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow">
+            <div class="card-header text-white" style="background-color: #0d425e;">
+                <h3 class="mb-0">Past Lottery Results</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Draw Name</th>
+                                <th>Date</th>
+                                <th>1st Prize</th>
+                                <th>2nd Prize</th>
+                                <th>3rd Prize</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for draw_data in draws_with_prizes %}
+                            <tr>
+                                <td>{{ draw_data.draw.draw_name }}</td>
+                                <td>{{ draw_data.draw.draw_date|date:"d M Y" }}</td>
+                                <td>
+                                    {% if draw_data.first_prize %}
+                                        {{ draw_data.first_prize.ticket_code }}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if draw_data.second_prize %}
+                                        {{ draw_data.second_prize.ticket_code }}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if draw_data.third_prize %}
+                                        {{ draw_data.third_prize.ticket_code }}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{% url 'home' %}?draw_date={{ draw_data.draw.draw_date|date:'Y-m-d' }}" 
+                                       class="btn btn-sm btn-outline-primary">Check</a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="6" class="text-center">No past results available</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

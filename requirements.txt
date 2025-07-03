@@ -1,0 +1,10 @@
+asgiref==3.8.1
+cffi==1.17.1
+charset-normalizer==3.4.2
+cryptography==45.0.4
+Django==5.2.3
+pdfminer.six==20250506
+pycparser==2.22
+python-dateutil==2.9.0.post0
+six==1.17.0
+sqlparse==0.5.3
