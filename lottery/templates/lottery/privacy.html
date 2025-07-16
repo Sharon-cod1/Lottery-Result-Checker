@@ -1,0 +1,42 @@
+{% extends "lottery/base.html" %}  
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0"><i class="fas fa-shield-alt me-2"></i>Privacy Policy</h2>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Last Updated: {% now "F j, Y" %}</p>
+                    
+                    <h4 class="mt-4 text-primary">1. Information We Collect</h4>
+                    <p>We collect lottery result data from publicly available sources to provide accurate and timely results to our users. We do not store personal information unless voluntarily provided (e.g., email for notifications).</p>
+                    
+                    <h4 class="mt-4 text-primary">2. How We Use Your Information</h4>
+                    <p>Any information collected is used solely for:</p>
+                    <ul>
+                        <li>Providing lottery result checking services</li>
+                        <li>Improving user experience</li>
+                        <li>Sending notifications (if subscribed)</li>
+                    </ul>
+                    
+                    <h4 class="mt-4 text-primary">3. Data Security</h4>
+                    <p>We implement industry-standard security measures to protect your information. However, no online service is 100% secure.</p>
+                    
+                    <h4 class="mt-4 text-primary">4. Third-Party Services</h4>
+                    <p>We use Google Analytics to understand traffic patterns. This service may use cookies but does not identify individual users.</p>
+                    
+                    <h4 class="mt-4 text-primary">5. Changes to This Policy</h4>
+                    <p>We may update this policy periodically. Continued use of our services constitutes acceptance of the updated policy.</p>
+                    
+                    <div class="alert alert-secondary mt-4">
+                        <h5 class="alert-heading"><i class="fas fa-info-circle"></i> Contact Us</h5>
+                        <p class="mb-0">For privacy-related concerns, please email <a href="mailto:privacy@keralalotterychecker.com">privacy@keralalotterychecker.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

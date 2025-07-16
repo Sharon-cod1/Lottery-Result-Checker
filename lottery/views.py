@@ -115,3 +115,9 @@ def past_results(request):
     return render(request, 'lottery/past_results.html', {
         'draws_with_prizes': draws_with_prizes
     })
+
+def privacy_policy(request):
+    return render(request, 'lottery/privacy.html')
+
+def terms_of_service(request):
+    return render(request, 'lottery/terms.html')

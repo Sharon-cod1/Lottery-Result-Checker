@@ -1,0 +1,47 @@
+{% extends "lottery/base.html" %}  
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0"><i class="fas fa-file-contract me-2"></i>Terms of Service</h2>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Effective Date: {% now "F j, Y" %}</p>
+                    
+                    <h4 class="mt-4 text-primary">1. Acceptance of Terms</h4>
+                    <p>By using Kerala Lottery Result Checker, you agree to these terms. If you disagree, please discontinue use immediately.</p>
+                    
+                    <h4 class="mt-4 text-primary">2. Service Description</h4>
+                    <p>We provide lottery result information sourced from official Kerala State Lottery publications. We strive for accuracy but cannot guarantee 100% correctness.</p>
+                    
+                    <h4 class="mt-4 text-primary">3. User Responsibilities</h4>
+                    <p>You agree not to:</p>
+                    <ul>
+                        <li>Use our service for illegal activities</li>
+                        <li>Attempt to disrupt service availability</li>
+                        <li>Misrepresent information</li>
+                    </ul>
+                    
+                    <h4 class="mt-4 text-primary">4. Limitation of Liability</h4>
+                    <p>We are not responsible for:</p>
+                    <ul>
+                        <li>Financial decisions made based on our information</li>
+                        <li>Service interruptions beyond our control</li>
+                        <li>Inaccuracies in third-party data sources</li>
+                    </ul>
+                    
+                    <h4 class="mt-4 text-primary">5. Changes to Terms</h4>
+                    <p>We reserve the right to modify these terms at any time. Continued use constitutes acceptance.</p>
+                    
+                    <div class="alert alert-warning mt-4">
+                        <h5 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> Disclaimer</h5>
+                        <p class="mb-0">This service is not affiliated with the Government of Kerala or Kerala State Lotteries. Always verify results with official sources.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
