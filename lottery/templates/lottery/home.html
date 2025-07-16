@@ -11,12 +11,12 @@
                 <form method="POST" action="{% url 'check_result' %}">
                     {% csrf_token %}
                     <div class="mb-3">
-                        <label for="ticket_code" class="form-label">Ticket Code</label>
+                        <label for="ticket_code" class="form-label">Ticket Number</label>
                         <input type="text" class="form-control" id="ticket_code" name="ticket_code" 
-                               placeholder="Enter your ticket code " required>
+                               placeholder="Enter full code (eg: AB123456)" required>
                     </div>
                     <div class="mb-3">
-                        <label for="draw_date" class="form-label">Draw Date</label>
+                        <label for="draw_date" class="form-label">Draw Date </label>
                         <select class="form-select" id="draw_date" name="draw_date" required>
                             <option value="" selected disabled>Select a date</option>
                             {% for draw in draws %}
