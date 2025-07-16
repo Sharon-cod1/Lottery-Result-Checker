@@ -97,4 +97,3 @@ def parse_lottery_pdf(pdf_path):
         'draw_time': draw_time,
         'prizes': prizes
     }
-
